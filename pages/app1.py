@@ -6,7 +6,7 @@ from app import app
 
 layout = html.Div([
     html.Div([
-        html.H1('自己紹介', style={'textAlign': 'center', 'background': '#EEFFDD', 'marginTop': '3%', 'padding': '1%'}),
+        html.H1('自己紹介', style={'textAlign': 'center', 'background': '#EEFFDD', 'marginTop': '3%', 'padding': '1%','fontSize': '400%'}),
             ]),
         html.Div([
             html.Div([
@@ -14,14 +14,14 @@ layout = html.Div([
                 style = {'height': '130%'})
             ] , style={'marginTop':'5%', 'marginLeft': '5%', 'display': 'inline-block', 'height': 500}),
             html.Div([
-                dcc.Link('ダイエット中hideyan', href='https://twitter.com/OgawaHideyuki', style={'marginBottom': '3%', 'textDecoration':'none'}),
+                dcc.Link('hideyan', href='https://twitter.com/OgawaHideyuki', style={'marginBottom': '3%', 'textDecoration':'none'}),
                 html.Br(),
                 html.Div(' '),
                 html.H1('Data VisualizationでPyconjpのトーク応募を計画中。'),
                 html.H1('はんなりPython運営'),
                 html.H1('合同会社　長目　経営'),
-                html.H1('データ分析、金融'),
-                html.H1('ブロックチェーン、最近IoTも'),
+                html.H1('データ分析、金融、ブロックチェーン'),
+                html.H1('最近IoTも'),
                 html.H1('何事も全力でをモットーに。'),
                 
                 ], style={'display': 'inline-block', 'fontSize': '300%', 'marginLeft': '5%', 'color': 'limegreen'})

@@ -1,9 +1,12 @@
 import dash_core_components as dcc 
 import dash_html_components as html 
 from dash.dependencies import Input, Output 
+import os 
 
 from app import app 
-from pages import app1, app2 
+from pages import app1, app2, app3 
+
+server = app.server 
 
 app.layout = html.Div([
         dcc.Location(id = 'url',refresh=False),
@@ -16,7 +19,7 @@ indexPage = html.Div([
     html.Br(),
     html.Div([
     html.H1('Dashの新機能とその他Tips'),
-    html.H1('ラズパイはまた今度・・・')],
+    html.H1('なんか色々凄いし試したい・・・')],
     style = {'textAlign': 'center' , 'padding': '5% 0 5%', 'margin':'5% 0 5%',  'background': '#EEFFDD'}
     ),
     html.Br(),
@@ -33,7 +36,9 @@ def displayPage(pathname):
     if pathname == '/pages/app1':
         return app1.layout 
     elif pathname == '/pages/app2':
-        return app2.layout 
+        return app2.layout
+    elif pathname == '/pages/app3':
+        return app3.layout
     else:
         return indexPage
 
