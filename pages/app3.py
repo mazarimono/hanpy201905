@@ -11,6 +11,9 @@ from datetime import timedelta
 
 df = pd.read_csv('./data/longform2.csv', index_col=0)
 
+dfkyoto = pd.read_csv('./data/kyoto_hotel_comp1.csv', index_col=0)
+mapbox_access_token = "pk.eyJ1IjoibWF6YXJpbW9ubyIsImEiOiJjanA5Y3IxaWsxeGtmM3dweDh5bjgydGFxIn0.3vrfsqZ_kGPGhi4_npruGg"
+
 dfjpy = pd.read_csv('https://raw.githubusercontent.com/plotly/dash-web-trader/master/pairs/USDJPY.csv', index_col=1, parse_dates=['Date'])
 dffjpy = dfjpy['2016/1/5']
 dffjpy = dffjpy.resample('1S').last().bfill()
@@ -66,7 +69,7 @@ layout = html.Div([
     ]),
     html.Div([
         html.Div([
-            html.H3(['ライブアップデートもできる！'], style = {'textAlign': 'Center', 'fontSize': '300%', 'background': '#EEFFDD', 'marginTop': '5%'})
+            html.H3(['ライブアップデートも！'], style = {'textAlign': 'Center', 'fontSize': '300%', 'background': '#EEFFDD', 'marginTop': '5%'})
                 ]),
         html.Div([
             dcc.Graph(id="usdjpy"),
@@ -76,6 +79,51 @@ layout = html.Div([
                         )
                 ], style={'height': '30%', 'width': '80%', 'margin': '0 auto 0', 'textAlign': 'center','background': '#EEFFDD'}),
     ]),
+    html.Div([
+        html.Div([
+                    html.H3(['マップも表示可能です！'], style = {'textAlign': 'Center', 'fontSize': '250%', 'background': '#EEFFDD', 'marginTop': '5%'})
+                ]),
+                dcc.Graph(
+                    id = 'kyoto-hotels',
+                    figure = {
+                        'data':[
+                        go.Scattermapbox(
+                        lat = dfkyoto[dfkyoto['age']== i]['ido'],
+                        lon = dfkyoto[dfkyoto['age']== i]['keido'],
+                        mode = 'markers',
+                        marker = dict(
+                        size=9
+                        ),
+                        text = dfkyoto[dfkyoto['age']== i]['hotel_name'],
+                        name = str(i),
+                        ) for i in dfkyoto['age'].unique()
+                        ],
+                        'layout':
+                        go.Layout(
+                            autosize=True,
+                            hovermode='closest',
+                            mapbox = dict(
+                            accesstoken=mapbox_access_token,
+                            bearing = 0,
+                            center = dict(
+                            lat=np.mean(dfkyoto['ido']),
+                            lon=np.mean(dfkyoto['keido'])
+                        ),
+                        pitch = 90,
+                        zoom=10,
+                    ),
+                    height=800
+                        )
+                    }
+                    )
+    ], style={'padding':50}),
+    html.Div([
+        dcc.Link('go to next page', href='app4'),
+        html.Br(),
+        dcc.Link('go back', href='app2'),
+        html.Br(),
+        dcc.Link('Back to Top', href='/'),
+    ], style = {'textAlign': 'right', 'marginRight': '5%'})
 ])
 
 @app.callback(

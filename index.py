@@ -4,7 +4,7 @@ from dash.dependencies import Input, Output
 import os 
 
 from app import app 
-from pages import app1, app2, app3 
+from pages import app1, app2, app3, app4 
 
 server = app.server 
 
@@ -39,6 +39,8 @@ def displayPage(pathname):
         return app2.layout
     elif pathname == '/pages/app3':
         return app3.layout
+    elif pathname == '/pages/app4':
+        return app4.layout
     else:
         return indexPage
 
