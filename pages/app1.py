@@ -27,8 +27,8 @@ layout = html.Div([
                 ], style={'display': 'inline-block', 'fontSize': '300%', 'marginLeft': '5%', 'color': 'limegreen'})
         ], style={'background': '#EEFFDD'}),
     html.Div([    
-    dcc.Link('Go to Page1', href = '/'),
+    dcc.Link('Go to Next Page', href = 'app2'),
     html.Br(),
-    dcc.Link('Go to Next Page', href = 'app2')
+    dcc.Link('Go to Page1', href = '/')
     ], style = {'textAlign': 'right', 'marginRight': '5%'}),
 ])
